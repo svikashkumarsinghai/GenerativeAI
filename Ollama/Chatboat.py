@@ -13,7 +13,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📄 AI Document Chatbot")
+st.title("📄 Vikash's AI Assitant")
 
 
 # -----------------------------------

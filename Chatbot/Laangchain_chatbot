@@ -1,0 +1,44 @@
+import os
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_ollama import ChatOllama
+
+llm = ChatOllama(
+    model="smollm2:latest",
+    temperature=0,
+)
+
+parser = StrOutputParser()
+
+def chat():
+    chat_history = [
+        ("system", "You are a helpful chatbot. Be concise and accurate.")
+    ]
+
+    print("Langchain Chatbot. Type 'exit' to quit\n")
+
+    while True:
+        user_input = input("You: ").strip()
+
+        if user_input.lower() == "exit":
+            break
+
+        # add user message
+        chat_history.append(("user", user_input))
+
+        # build prompt dynamically
+        prompt = ChatPromptTemplate.from_messages(chat_history)
+
+        chain = prompt | llm | parser
+
+        # get response for user query
+        response = chain.invoke({})
+
+        # show & save the assistant response
+        print(f"Bot: {response}\n")
+
+        chat_history.append(("assistant", response))        
+
+        print("-"*80)
+
+chat()
