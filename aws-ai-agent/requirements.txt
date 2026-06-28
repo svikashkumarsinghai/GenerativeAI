@@ -1,0 +1,5 @@
+langchain
+langchain-openai
+boto3
+python-dotenv
+langchain-groq
